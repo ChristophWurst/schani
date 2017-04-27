@@ -1,0 +1,10 @@
+[package]
+name = "schani"
+version = "0.1.0"
+authors = ["Christoph Wurst <christoph@winzerhof-wurst.at>"]
+
+[[bin]]
+name = "processor"
+path = "src/bin/processor.rs"
+
+[dependencies]
