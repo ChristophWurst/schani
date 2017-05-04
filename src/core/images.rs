@@ -1,5 +1,6 @@
-
 #[derive(Debug)]
-pub struct RawImage {
+pub struct RawtherapeeImage {
     pub name: String,
+    pub raw: String,
+    pub sidecar: String,
 }
