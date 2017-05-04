@@ -8,3 +8,5 @@ name = "processor"
 path = "src/bin/processor.rs"
 
 [dependencies]
+rocket = "0.2.6"
+rocket_codegen = "0.2.6"
