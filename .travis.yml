@@ -42,13 +42,13 @@ script:
   # Copy testing env file if one exists
   - if [[ -f .env.testing ]]; then cp .env.testing .env; fi
 
-  # Build
-  - cargo build --verbose
-
   # Migrate
   - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration run; fi
   - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration run; fi
   - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration redo; fi
+
+  # Build
+  - cargo build --verbose
 
   # Test
   - cargo test --verbose
