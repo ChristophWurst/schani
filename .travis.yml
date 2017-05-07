@@ -34,7 +34,7 @@ before_script:
   - mysql -u root -e "GRANT ALL ON schani_import.* TO 'schani'@'localhost';"
 
   # Install Diesel CLI tool to run migrations
-  - if [[ "$SCHANI_TEST" = "schani_import" ]]; then cargo install diesel_cli; fi
+  # - if [[ "$SCHANI_TEST" = "schani_import" ]]; then cargo install diesel_cli; fi
 
 script:
   - echo Testing $SCHANI_TEST
