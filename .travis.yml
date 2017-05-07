@@ -1,3 +1,27 @@
 language: rust
 rust:
   - nightly
+
+env:
+  global:
+  - SCHANI_TEST=schani
+
+matrix:
+  include:
+  - env: SCHANI_TEST=schani_import
+  - env: SCHANI_TEST=schani_processor
+  - env: SCHANI_TEST=schani_store
+  fast_finish: true
+
+branches:
+  only:
+  - master
+
+before_script:
+  - cd $SCHANI_TEST
+
+script:
+  - echo Testing $SCHANI_TEST
+
+  - cargo build --verbose
+  - cargo test --verbose
