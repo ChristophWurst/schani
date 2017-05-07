@@ -7,3 +7,6 @@
 */Cargo.lock
 
 /resources/DSC_2936.jpg
+
+# Don't include possibly sensitive information
+.env

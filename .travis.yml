@@ -20,13 +20,24 @@ branches:
   only:
   - master
 
+services:
+  - mysql
+
 cache: cargo
 
 before_script:
   - cd $SCHANI_TEST
+  - cargo install diesel_cli
 
 script:
   - echo Testing $SCHANI_TEST
 
+  # Build
   - cargo build --verbose
+
+  # Migrate
+  - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration run; fi
+  - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration redo; fi
+
+  # Test
   - cargo test --verbose
