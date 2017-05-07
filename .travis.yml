@@ -27,15 +27,26 @@ cache: cargo
 
 before_script:
   - cd $SCHANI_TEST
-  - cargo install diesel_cli
+
+  # Prepare DB
+  - mysql -u root -e 'create database schani_import;'
+  - mysql -u root -e "CREATE USER 'schani'@'localhost' IDENTIFIED BY '123456'
+  - mysql -u root -e "GRANT ALL ON schani_import.* TO 'schani'@'localhost';"
+
+  # Install Diesel CLI tool to run migrations
+  - if [[ "$SCHANI_TEST" = "schani_import" ]]; then cargo install diesel_cli; fi
 
 script:
   - echo Testing $SCHANI_TEST
+
+  # Copy testing env file if one exists
+  - if [[ -f .env.testing ]]; then cp .env.testing .env; fi
 
   # Build
   - cargo build --verbose
 
   # Migrate
+  - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration run; fi
   - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration run; fi
   - if [[ "$SCHANI_TEST" = "schani_import" ]]; then diesel migration redo; fi
 
