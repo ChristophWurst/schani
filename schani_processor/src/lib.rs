@@ -1,5 +1,6 @@
-use core::images::RawtherapeeImage;
+extern crate schani;
 
+use schani::images::RawtherapeeImage;
 use std::process::Command;
 
 pub fn process_raw(img: &RawtherapeeImage) {

@@ -1,7 +1,6 @@
 #![feature(plugin, custom_derive)]
 #![plugin(rocket_codegen)]
 
-extern crate schani;
 extern crate rocket;
 
 use rocket::Data;
@@ -29,7 +28,7 @@ fn upload_image(file_id: &str, data: Data) -> String {
     // TODO: transfer file to the store
     // TODO: prevent directory traversals
     // TODO: save extension/type on data import
-    data.stream_to_file(format!("/tmp/{}.NEF"));
+    data.stream_to_file(format!("/tmp/{}.NEF", file_id));
 
     format!("image {} uploaded successfully", file_id)
 }

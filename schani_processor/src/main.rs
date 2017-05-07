@@ -2,10 +2,11 @@
 #![plugin(rocket_codegen)]
 
 extern crate schani;
+extern crate schani_processor;
 extern crate rocket;
 
-use schani::core::images::RawtherapeeImage;
-use schani::processing::process_raw;
+use schani::images::RawtherapeeImage;
+use schani_processor::process_raw;
 
 #[post("/process/<file>")]
 fn index(file: &str) -> &'static str {
