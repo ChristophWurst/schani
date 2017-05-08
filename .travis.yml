@@ -1,5 +1,7 @@
 language: rust
 rust:
+  - stable
+  - beta
   - nightly
 
 env:
@@ -8,6 +10,12 @@ env:
 
 matrix:
   include:
+  - rust: stable
+    env: SCHANI_TEST=schani_client
+  - rust: beta
+    env: SCHANI_TEST=schani_client
+  - rust: nightly
+    env: SCHANI_TEST=schani_client
   - rust: nightly
     env: SCHANI_TEST=schani_import
   - rust: nightly
