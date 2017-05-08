@@ -14,6 +14,8 @@ matrix:
     env: SCHANI_TEST=schani_processor
   - rust: nightly
     env: SCHANI_TEST=schani_store
+  - rust: nightly
+    env: SCHANI_TEST=schani_upload
   fast_finish: true
 
 branches:
