@@ -1,18 +1,20 @@
 #[macro_use]
-extern crate diesel_codegen;
-#[macro_use]
 extern crate diesel;
+#[macro_use]
+extern crate diesel_codegen;
 extern crate dotenv;
 
-pub mod schema;
 pub mod models;
+pub mod schema;
+mod messaging;
 
 use diesel::prelude::*;
 use diesel::mysql::MysqlConnection;
 use dotenv::dotenv;
 use std::env;
 
-use self::models::{Import, NewImport};
+use messaging::send_amqp_message;
+use models::{Import, NewImport};
 
 pub fn establish_db_connection() -> MysqlConnection {
     dotenv().ok();
@@ -48,6 +50,7 @@ pub fn create_import<'a>(conn: &MysqlConnection, name: &'a str) -> Import {
         .into(imports::table)
         .execute(conn)
         .expect("Error saving new import");
+    send_amqp_message();
 
     imports::table.order(imports::id.desc()).first(conn).unwrap()
 }
