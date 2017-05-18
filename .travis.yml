@@ -31,7 +31,7 @@ branches:
   - master
 
 services:
-  - mysql
+  - postgresql
 
 cache: cargo
 
@@ -39,7 +39,7 @@ before_script:
   - cd $SCHANI_TEST
 
   # Prepare DB
-  - mysql -u root -e "create database schani_import;"
+  - psql -c 'create database schani_import;' -U postgres
   - mysql -u root -e "CREATE USER 'schani'@'localhost' IDENTIFIED BY '123456';"
   - mysql -u root -e "GRANT ALL ON schani_import.* TO 'schani'@'localhost';"
 
